@@ -1,0 +1,21 @@
+.row
+  .col-lg-12
+    .widget
+      .widget-header
+        i.fa.fa-list
+        = Gallery.model_name.human(count: 1.1)
+        a.btn.btn-sm.btn-primary.pull-right ui-sref="galleries.new"
+          = I18n.t("add_gallery")
+      .widget-body.no-padding
+        .table-responsive
+          table.table
+            tbody
+              tr ng-repeat="gallery in galleries"
+                td style="width: 90%"
+                  | {{ gallery.title }}
+                td
+                  .btn-group
+                    a.btn.btn-sm.btn-info ui-sref="galleries.edit({id: gallery.id})"
+                      i.fa.fa-pencil
+                    a.btn.btn-sm.btn-danger ng-click="destroy(gallery)"
+                      i.fa.fa-times

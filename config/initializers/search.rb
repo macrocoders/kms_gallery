@@ -1,0 +1,1 @@
+Kms::SearchService.register Gallery

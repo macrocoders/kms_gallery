@@ -1,0 +1,26 @@
+.row
+  .col-lg-12
+    form role="form"
+      .form-group
+        label for="title" = Gallery.human_attribute_name(:title)
+        input#title.form-control type="text" ng-model="gallery.title"
+      .form-group
+        label for="poster" = Gallery.human_attribute_name(:poster)
+        div flow-init="{singleFile: true, headers: setHeaders, fileParameterName: 'gallery[poster]'}" flow-files-submitted="gallery.poster = $flow.files[0].file" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="$file.msg = $message"
+          input type="file" flow-btn="" ng-model='gallery.poster'
+          div class="thumbnail" ng-show="!$flow.files.length"
+            img ng-src="{{gallery.poster.url}}"
+          div class="thumbnail" ng-show="$flow.files.length"
+            img flow-img="$flow.files[0]"
+      .form-group
+        label for="images" = Gallery.human_attribute_name(:images)
+        .button.btn.btn-default ng-model="files" ngf-multiple="true" ngf-select="" ngf-pattern="'image/*'" ngf-max-size="4MB"  Выбрать
+        .row ng-show="files.length" style="margin: 30px 0;"
+          .col-md-3 ng-repeat="file in files"
+            div style="height: 220px;" ng-show="file"
+              .caption
+                | {{file.name}}
+              .thumbnail
+                img ngf-src="file"
+
+      button.btn.btn-default ng-click="create(files)" type="submit" = I18n.t(:add_gallery)

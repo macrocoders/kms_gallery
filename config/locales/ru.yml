@@ -1,0 +1,16 @@
+ru:
+  add_gallery: "Добавить галерею"
+  update_gallery: "Обновить галерею"
+  gallery: "Галерея"
+  activerecord:
+    models:
+      gallery:
+        one: "Галерея"
+        few: "Галереи"
+        many: "Галерей"
+        other: "Галереи"
+    attributes:
+      gallery:
+        title: "Заголовок"
+        poster: "Главное фото"
+        images: "Фотографии"

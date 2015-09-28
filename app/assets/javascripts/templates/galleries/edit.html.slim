@@ -15,18 +15,18 @@
       .form-group
         label for="images" = Gallery.human_attribute_name(:images)
         .button.btn.btn-default ng-model="files" ngf-multiple="true" ngf-select="" ngf-pattern="'image/*'" ngf-max-size="4MB" Выбрать
-        .row ng-show="files.length" style="margin: 30px 0;"
-          .col-md-3 ng-repeat="file in files"
-            div style="height: 220px;" ng-show="file"
+        .row ng-show="files.length" style="margin: 15px 0;"
+          .col-md-3 style="height: 220px;" ng-repeat="file in files"
+            div ng-show="file"
               .caption
                 | {{file.name}}
               .thumbnail
-                img ngf-src="file"
-        .row ng-show="!files.length" style="margin: 30px 0;"
-          .col-md-3 ng-repeat="file in gallery.images"
-            div style="height: 220px;" ng-show="file"
+                img ngf-src="file" style="max-height: 200px;"
+        .row ng-show="!files.length" style="margin: 15px 0;"
+          .col-md-3 style="height: 220px;" ng-repeat="file in gallery.images"
+            div ng-show="file"
               .caption
                 | {{file.name}}
               .thumbnail
-                img ngf-src="file.url"
+                img ngf-src="file.url" style="max-height: 200px;"
       button.btn.btn-default ng-click="update(files)" type="submit" = I18n.t(:update_gallery)

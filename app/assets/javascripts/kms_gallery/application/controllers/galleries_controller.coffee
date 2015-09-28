@@ -21,10 +21,15 @@ GalleriesController = ($scope, $state, $cookieStore, Upload, Restangular, $state
         url: 'kms/galleries'
         method: 'POST'
         fields: { 'gallery[title]' : $scope.gallery.title }
-        file: {'gallery[images]':files, 'gallery[poster]': $scope.gallery.poster}).then ->
-          $state.go('galleries')
-        ,->
-          console.log('error')
+        file: {'gallery[images]':files, 'gallery[poster]': $scope.gallery.poster}).progress((evt) ->
+          $scope.progressPercentage = parseInt(100.0 * evt.loaded / evt.total)
+          console.log 'progress: ' + $scope.progressPercentage + '% ').success((data, status, headers, config) ->
+            $state.go('galleries')).error (data, status, headers, config) ->
+              console.log 'error status: ' + status
+        #.then ->
+        #  $state.go('galleries')
+        #,->
+        #  console.log('error')
 
   $scope.update = (files) ->
     updateUrl = 'kms/galleries/'+$scope.gallery.id

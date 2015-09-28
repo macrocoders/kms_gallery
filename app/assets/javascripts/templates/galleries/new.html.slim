@@ -22,5 +22,11 @@
                 | {{file.name}}
               .thumbnail
                 img ngf-src="file" style="max-height: 200px;"
+        /.row
+        /  .col-md-12
+        /    .progress.progress-striped ng-class="{active: progressPercentage == 100}"
+        /      .progress-bar role="progressbar" ng-style="{width: progressPercentage + '%'}"
+
+
 
       button.btn.btn-default ng-click="create(files)" type="submit" = I18n.t(:add_gallery)

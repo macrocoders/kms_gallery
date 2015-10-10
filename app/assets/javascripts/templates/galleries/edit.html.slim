@@ -12,21 +12,31 @@
             img ng-src="{{gallery.poster.url}}"
           div class="thumbnail" ng-show="$flow.files.length"
             img flow-img="$flow.files[0]"
-      .form-group
-        label for="images" = Gallery.human_attribute_name(:images)
-        .button.btn.btn-default ng-model="files" ngf-multiple="true" ngf-select="" ngf-pattern="'image/*'" ngf-max-size="4MB" Выбрать
-        .row ng-show="files.length" style="margin: 15px 0;"
-          .col-md-3 style="height: 220px;" ng-repeat="file in files"
-            div ng-show="file"
-              .caption
-                | {{file.name}}
-              .thumbnail
-                img ngf-src="file" style="max-height: 200px;"
-        .row ng-show="!files.length" style="margin: 15px 0;"
-          .col-md-3 style="height: 220px;" ng-repeat="file in gallery.images"
-            div ng-show="file"
-              .caption
-                | {{file.name}}
-              .thumbnail
-                img ngf-src="file.url" style="max-height: 200px;"
-      button.btn.btn-default ng-click="update(files)" type="submit" = I18n.t(:update_gallery)
+      button.btn.btn-default ng-click="update()" type="submit" = I18n.t(:update_gallery)
+
+    .col-lg-12 ng-show="gallery.pictures.length"
+      table.table.table-striped.files.ng-cloak
+        tr ng-repeat="file in gallery.pictures"
+          td style="width: 90%;"
+            img ng-src="{{ file.picture.url }}" width="200"
+          td
+            .btn-group.pull-right
+              a.btn.btn-sm.btn-danger ng-click="destroyPicture($index, gallery)"
+                i.fa.fa-times
+
+    .col-lg-12
+      .button.btn.btn-default ng-model="files" ngf-multiple="true" ngf-select="uploadPictures($files, gallery)" accept="image/*" ngf-max-size="4MB" Добавить фото
+      .row ng-show="files.length"
+        .col-lg-12
+          table.table.table-striped.files.ng-cloak
+            tr ng-repeat="file in files"
+              td style="width: 50%;"
+                img ngf-src="file" width="200"
+              td style="width: 25%;"
+                | {{ file.name }}
+              td style="width: 25%;"
+                .progress.progress-striped ng-class="{active: file.progress == 100}"
+                  .progress-bar role="progressbar" ng-style="{width: file.progress + '%'}"
+
+    .col-md-12 style="margin-top: 20px;"
+      .button.btn.btn-default ng-click="$state.go('galleries')" Обратно к списку галерей

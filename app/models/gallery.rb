@@ -4,6 +4,6 @@ class Gallery < ActiveRecord::Base
   include Kms::Permalinkable
   include Kms::CompileTemplates
   friendly_id :title, use: :slugged
-  mount_uploader :poster, SlideUploader
-  mount_uploaders :images, SlideUploader
+  has_many :pictures, dependent: :destroy
+  mount_uploader :poster, GalleryUploader
 end

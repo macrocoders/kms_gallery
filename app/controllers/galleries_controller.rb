@@ -4,16 +4,12 @@ class GalleriesController < Kms::ApplicationController
   end
 
   def create
-    file_arr = params.values.find_all { |value| value.class == ActionDispatch::Http::UploadedFile }
-    gallery_params[:images] = file_arr
     @gallery = Gallery.new(gallery_params)
     @gallery.save
     render json: @gallery.to_json
   end
 
   def update
-    file_arr = params.values.find_all { |value| value.class == ActionDispatch::Http::UploadedFile }
-    gallery_params[:images] = file_arr
     @gallery = Gallery.find(params[:id])
     @gallery.update_attributes(gallery_params)
     render json: @gallery.to_json
@@ -21,7 +17,7 @@ class GalleriesController < Kms::ApplicationController
 
   def show
     @gallery = Gallery.find(params[:id])
-    render json: @gallery.to_json
+    render json: @gallery.to_json(include: :pictures)
   end
 
   def destroy
@@ -30,9 +26,25 @@ class GalleriesController < Kms::ApplicationController
     render json: {}, status: :no_content
   end
 
+  def pictures_create
+    @picture = Picture.new(picture_params)
+    @picture.save
+    render json: @picture.to_json
+  end
+
+  def picture_destroy
+    @picture = Picture.find(params[:id])
+    @picture.destroy
+    render json: {}, status: :no_content
+  end
+
   protected
 
   def gallery_params
     params.require(:gallery).permit!
+  end
+
+  def picture_params
+    params.require(:picture).permit!
   end
 end

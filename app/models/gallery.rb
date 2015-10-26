@@ -6,4 +6,6 @@ class Gallery < ActiveRecord::Base
   friendly_id :title, use: :slugged
   has_many :pictures, dependent: :destroy
   mount_uploader :poster, GalleryUploader
+
+  default_scope { order(:position) }
 end

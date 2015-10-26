@@ -9,9 +9,10 @@
       .widget-body.no-padding
         .table-responsive
           table.table
-            tbody
-              tr ng-repeat="gallery in galleries"
+            tbody as-sortable="" ng-model="galleries"
+              tr ng-repeat="gallery in galleries" as-sortable-item=""
                 td style="width: 90%"
+                  i.fa.fa-bars as-sortable-item-handle="" &nbsp;
                   | {{ gallery.title }}
                 td
                   .btn-group

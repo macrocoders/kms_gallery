@@ -1,6 +1,6 @@
 class GalleriesController < Kms::ApplicationController
   def index
-    render json: Gallery.order(:created_at).to_json
+    render json: Gallery.order(:position).to_json
   end
 
   def create

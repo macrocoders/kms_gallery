@@ -9,7 +9,7 @@
       .widget-body.no-padding
         .table-responsive
           table.table
-            tbody as-sortable="" ng-model="galleries"
+            tbody as-sortable="galleriesSortableOptions" ng-model="galleries"
               tr ng-repeat="gallery in galleries" as-sortable-item=""
                 td style="width: 90%"
                   i.fa.fa-bars as-sortable-item-handle="" &nbsp;

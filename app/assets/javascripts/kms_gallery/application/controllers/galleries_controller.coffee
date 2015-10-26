@@ -61,5 +61,13 @@ GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangul
       $http.delete('kms/galleries/pictures/'+picture_to_delete.id).then ->
         gallery.pictures.splice(idx, 1)
 
+  $scope.galleriesSortableOptions =
+    orderChanged: (event)->
+      for gallery, index in event.dest.sortableScope.modelValue
+        gallery_copy =
+          id: gallery.id
+          position: index
+        Restangular.restangularizeElement($scope.model, gallery_copy, 'galleries').put()
+
 angular.module('KMS')
     .controller('GalleriesController', ['$scope', '$state', '$cookieStore', '$timeout', 'Upload', 'Restangular', '$stateParams', '$http', GalleriesController])

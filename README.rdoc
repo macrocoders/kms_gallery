@@ -1,3 +1,27 @@
 = KmsGallery
 
+1. Add to Gemfile
+        gem "kms", git: "git@gitlab.com:webgradus/kms.git", branch: 'temp'
+        Пока это расширение работает только с веткой "temp" 
+
+        gem "kms_gallery", git: "https://gitlab.com/webgradus/kms_gallery.git"
+
+2. Run generator:
+
+        bundle exec rails g kms_gallery:install
+
+3. Copy migrations:
+
+        bundle exec rake kms_gallery_engine:install:migrations
+
+4. Migrate:
+
+        bundle exec rake db:migrate
+
+5. Recompile assets:
+
+        bundle exec rake assets:precompile
+
+6. Restart KMS instance
+
 This project rocks and uses MIT-LICENSE.

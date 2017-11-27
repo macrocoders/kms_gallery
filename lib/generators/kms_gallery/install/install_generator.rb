@@ -5,7 +5,7 @@ module KmsGallery
 
     def insert_engine_routes
       route %(
-        mount KmsGallery::Engine => '/kms'
+        mount Kms::Gallery::Engine => '/kms'
       )
     end
 

@@ -5,7 +5,7 @@ class GalleryUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  include CarrierWave::ImageOptimizer
+  #include CarrierWave::ImageOptim
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -32,7 +32,7 @@ class GalleryUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  process :optimize
+  #process :optimize
 
   # Create different versions of your uploaded files:
   # version :thumb do

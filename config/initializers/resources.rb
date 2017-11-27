@@ -1,1 +1,1 @@
-Kms::ResourceService.register(:gallery, Gallery, "fa-picture-o")
+Kms::ResourceService.register(:gallery, Kms::Gallery::Gallery, "fa-picture-o")

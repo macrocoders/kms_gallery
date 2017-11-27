@@ -1,3 +1,5 @@
+angular.module('KMS').requires.push('ngFileUpload')    
+
 GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangular, $stateParams, $http) ->
   $scope.store = Restangular.all('galleries')
   $scope.$state = $state
@@ -42,7 +44,7 @@ GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangul
         file.upload = Upload.upload(
           url: 'kms/galleries/'+$scope.gallery.id+'/pictures'
           method: 'POST'
-          fields: { 'picture[gallery_id]' : $scope.gallery.id }
+          fields: { 'picture[gallery_id]' : $scope.gallery.id, 'picture[picture]' : file }
           file: {'picture[picture]' : file})
         file.upload.then ((response) ->
           $timeout ->
@@ -68,6 +70,7 @@ GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangul
           id: gallery.id
           position: index
         Restangular.restangularizeElement($scope.model, gallery_copy, 'galleries').put()
+        
 
 angular.module('KMS')
     .controller('GalleriesController', ['$scope', '$state', '$cookieStore', '$timeout', 'Upload', 'Restangular', '$stateParams', '$http', GalleriesController])

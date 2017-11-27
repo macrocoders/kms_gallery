@@ -1,3 +1,3 @@
 Kms::AbilityService.register do
-  can :manage, Gallery
+  can :manage, Kms::Gallery::Gallery
 end

@@ -3,7 +3,7 @@
     .widget
       .widget-header
         i.fa.fa-list
-        = Gallery.model_name.human(count: 1.1)
+        = Kms::Gallery::Gallery.model_name.human(count: 1.1)
         a.btn.btn-sm.btn-primary.pull-right ui-sref="galleries.new"
           = I18n.t("add_gallery")
       .widget-body.no-padding

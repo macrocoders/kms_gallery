@@ -22,6 +22,10 @@ GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangul
     fd = new FormData
     fd.append('gallery[title]', $scope.gallery.title)
     fd.append('gallery[poster]', $scope.gallery.poster)
+    fd.append('gallery[h1]', $scope.gallery.h1)
+    fd.append('gallery[meta_title]', $scope.gallery.meta_title)
+    fd.append('gallery[meta_keywords]', $scope.gallery.meta_keywords)
+    fd.append('gallery[meta_description]', $scope.gallery.meta_description)
     $scope.store.withHttpConfig({ transformRequest: angular.identity }).post(fd, null, {"Content-Type": undefined}).then ->
       $state.go('galleries')
     ,->
@@ -30,6 +34,10 @@ GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangul
   $scope.update = ->
     fd = new FormData
     fd.append('gallery[title]', $scope.gallery.title)
+    fd.append('gallery[h1]', $scope.gallery.h1)
+    fd.append('gallery[meta_title]', $scope.gallery.meta_title)
+    fd.append('gallery[meta_keywords]', $scope.gallery.meta_keywords)
+    fd.append('gallery[meta_description]', $scope.gallery.meta_description)
     if $scope.gallery.poster.constructor.name == "File"
       fd.append('gallery[poster]', $scope.gallery.poster)
     $scope.gallery.withHttpConfig({ transformRequest: angular.identity }).post('', fd, '', {"Content-Type": undefined}).then ->

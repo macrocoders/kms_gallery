@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.version     = Kms::Gallery::VERSION
   s.authors     = ["Ivan Fefilov"]
   s.email       = ["ivfefilov@gmail.com"]
-  s.homepage    = "http://webgradus.ru"
+  s.homepage    = ""
   s.summary     = "Summary of KmsGallery."
   s.description = "Description of KmsGallery."
   s.license     = "MIT"

@@ -2,41 +2,59 @@
   .col-lg-12
     form role="form"
       .form-group
-        label for="title" = Gallery.human_attribute_name(:title)
+        label for="title" = Kms::Gallery::Gallery.human_attribute_name(:title)
         input#title.form-control type="text" ng-model="gallery.title"
       .form-group
-        label for="poster" = Gallery.human_attribute_name(:poster)
+        label for="poster" = Kms::Gallery::Gallery.human_attribute_name(:poster)
         div flow-init="{singleFile: true, headers: setHeaders, fileParameterName: 'gallery[poster]'}" flow-files-submitted="gallery.poster = $flow.files[0].file" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="$file.msg = $message"
           input type="file" flow-btn="" ng-model='gallery.poster'
           div class="thumbnail" ng-show="!$flow.files.length"
             img ng-src="{{gallery.poster.url}}"
           div class="thumbnail" ng-show="$flow.files.length"
             img flow-img="$flow.files[0]"
-      button.btn.btn-default ng-click="update()" type="submit" = I18n.t(:update_gallery)
-
-    .col-lg-12 ng-show="gallery.pictures.length"
-      table.table.table-striped.files.ng-cloak
-        tr ng-repeat="file in gallery.pictures"
-          td style="width: 90%;"
-            img ng-src="{{ file.picture.url }}" width="200"
-          td
-            .btn-group.pull-right
-              a.btn.btn-sm.btn-danger ng-click="destroyPicture($index, gallery)"
-                i.fa.fa-times
-
-    .col-lg-12
-      .button.btn.btn-default ng-model="files" ngf-multiple="true" ngf-select="uploadPictures($files, gallery)" accept="image/*" ngf-max-size="4MB" Добавить фото
-      .row ng-show="files.length"
-        .col-lg-12
-          table.table.table-striped.files.ng-cloak
-            tr ng-repeat="file in files"
-              td style="width: 50%;"
-                img ngf-src="file" width="200"
-              td style="width: 25%;"
-                | {{ file.name }}
-              td style="width: 25%;"
-                .progress.progress-striped ng-class="{active: file.progress == 100}"
-                  .progress-bar role="progressbar" ng-style="{width: file.progress + '%'}"
-
-    .col-md-12 style="margin-top: 20px;"
-      .button.btn.btn-default ng-click="$state.go('galleries')" Обратно к списку галерей
+      accordion close-others="true"
+        accordion-group is-open="status.open"
+          accordion-heading
+            i.pull-left.glyphicon ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"
+            | &nbsp;SEO
+          .form-group
+            label for="meta_title" = Kms::Gallery::Gallery.human_attribute_name(:meta_title)
+            input#meta_title.form-control type="text" ng-model="gallery.meta_title"
+          .form-group
+            label for="meta_keywords" = Kms::Gallery::Gallery.human_attribute_name(:meta_keywords)
+            input#meta_keywords.form-control type="text" ng-model="gallery.meta_keywords"
+          .form-group
+            label for="meta_description" = Kms::Gallery::Gallery.human_attribute_name(:meta_description)
+            input#meta_description.form-control type="text" ng-model="gallery.meta_description"
+          .form-group
+            label for="h1" = Kms::Gallery::Gallery.human_attribute_name(:h1)
+            input#h1.form-control type="text" ng-model="gallery.h1"       
+      button.btn.btn-default style="margin-bottom: 20px;" ng-click="update()" type="submit" = I18n.t(:update_gallery)
+    
+    .row  
+      .col-lg-12 ng-show="gallery.pictures.length"
+        table.table.table-striped.files.ng-cloak
+          tr ng-repeat="file in gallery.pictures"
+            td style="width: 90%;"
+              img ng-src="{{ file.picture.url }}" width="200"
+            td
+              .btn-group.pull-right
+                a.btn.btn-sm.btn-danger ng-click="destroyPicture($index, gallery)"
+                  i.fa.fa-times
+    .row              
+      .col-lg-12
+        .button.btn.btn-default ng-model="files" ngf-multiple="true" ngf-select="uploadPictures($files, gallery)" accept="image/*" ngf-max-size="4MB" Добавить фото
+        .row ng-show="files.length"
+          .col-lg-12
+            table.table.table-striped.files.ng-cloak
+              tr ng-repeat="file in files"
+                td style="width: 50%;"
+                  img ngf-src="file" width="200"
+                td style="width: 25%;"
+                  | {{ file.name }}
+                td style="width: 25%;"
+                  .progress.progress-striped ng-class="{active: file.progress == 100}"
+                    .progress-bar role="progressbar" ng-style="{width: file.progress + '%'}"
+    .row                
+      .col-md-12 style="margin-top: 20px;"
+        .button.btn.btn-default ng-click="$state.go('galleries')" Обратно к списку галерей

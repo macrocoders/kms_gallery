@@ -10,7 +10,7 @@
 
 3. Copy migrations:
 
-        bundle exec rake kms_gallery_engine:install:migrations
+        bundle exec rake kms_gallery:install:migrations
 
 4. Migrate:
 

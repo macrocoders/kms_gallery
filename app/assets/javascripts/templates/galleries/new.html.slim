@@ -2,15 +2,32 @@
   .col-lg-12
     form role="form"
       .form-group
-        label for="title" = Gallery.human_attribute_name(:title)
+        label for="title" = Kms::Gallery::Gallery.human_attribute_name(:title)
         input#title.form-control type="text" ng-model="gallery.title"
       .form-group
-        label for="poster" = Gallery.human_attribute_name(:poster)
+        label for="poster" = Kms::Gallery::Gallery.human_attribute_name(:poster)
         div flow-init="{singleFile: true, headers: setHeaders, fileParameterName: 'gallery[poster]'}" flow-files-submitted="gallery.poster = $flow.files[0].file" flow-file-added="!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]" flow-file-success="$file.msg = $message"
           input type="file" flow-btn="" ng-model='gallery.poster'
           div class="thumbnail" ng-show="!$flow.files.length"
             img ng-src="{{gallery.poster.url}}"
           div class="thumbnail" ng-show="$flow.files.length"
             img flow-img="$flow.files[0]"
+      accordion close-others="true"
+        accordion-group is-open="status.open"
+          accordion-heading
+            i.pull-left.glyphicon ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"
+            | &nbsp;SEO
+          .form-group
+            label for="meta_title" = Kms::Gallery::Gallery.human_attribute_name(:meta_title)
+            input#meta_title.form-control type="text" ng-model="gallery.meta_title"
+          .form-group
+            label for="meta_keywords" = Kms::Gallery::Gallery.human_attribute_name(:meta_keywords)
+            input#meta_keywords.form-control type="text" ng-model="gallery.meta_keywords"
+          .form-group
+            label for="meta_description" = Kms::Gallery::Gallery.human_attribute_name(:meta_description)
+            input#meta_description.form-control type="text" ng-model="gallery.meta_description"
+          .form-group
+            label for="h1" = Kms::Gallery::Gallery.human_attribute_name(:h1)
+            input#h1.form-control type="text" ng-model="gallery.h1"     
 
       button.btn.btn-default ng-click="create(files)" type="submit" = I18n.t(:add_gallery)

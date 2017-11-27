@@ -1,10 +1,8 @@
 = KmsGallery
 
 1. Add to Gemfile
-        gem "kms", git: "git@gitlab.com:webgradus/kms.git", branch: 'temp'
-        Пока это расширение работает только с веткой "temp" 
 
-        gem "kms_gallery", git: "https://gitlab.com/webgradus/kms_gallery.git"
+        gem "kms_gallery", git: "git@github.com:macrocoders/kms_gallery.git"
 
 2. Run generator:
 

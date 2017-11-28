@@ -20,12 +20,12 @@ GalleriesController = ($scope, $state, $cookieStore, $timeout, Upload, Restangul
 
   $scope.create = ->
     fd = new FormData
-    fd.append('gallery[title]', $scope.gallery.title)
+    fd.append('gallery[title]', $scope.gallery.title || 'Галерея')
     fd.append('gallery[poster]', $scope.gallery.poster)
-    fd.append('gallery[h1]', $scope.gallery.h1)
-    fd.append('gallery[meta_title]', $scope.gallery.meta_title)
-    fd.append('gallery[meta_keywords]', $scope.gallery.meta_keywords)
-    fd.append('gallery[meta_description]', $scope.gallery.meta_description)
+    fd.append('gallery[h1]', $scope.gallery.h1 || '')
+    fd.append('gallery[meta_title]', $scope.gallery.meta_title || '')
+    fd.append('gallery[meta_keywords]', $scope.gallery.meta_keywords || '')
+    fd.append('gallery[meta_description]', $scope.gallery.meta_description || '')
     $scope.store.withHttpConfig({ transformRequest: angular.identity }).post(fd, null, {"Content-Type": undefined}).then ->
       $state.go('galleries')
     ,->
